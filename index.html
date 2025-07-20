@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Проверка оплаты TERMIT</title>
-    <style>
-        body {
-            background-color: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 100px;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px;
-            width: 300px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Проверка оплаты TERMIT</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 100px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      width: 300px;
+      border-radius: 4px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: green;
+      color: white;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <h1>Проверка оплаты TERMIT</h1>
-    <input id="telegram" placeholder="Введите Telegram (например: @user)"><br>
-    <input id="amount" placeholder="Сумма или номер"><br>
-    <button onclick="checkPayment()">🔍 Проверить оплату</button>
-    <div class="result" id="result"></div>
+  <h1>Проверка оплаты TERMIT</h1>
+  <input id="telegram" placeholder="Введите Telegram (например: @user)"><br>
+  <input id="label" placeholder="Введите номер заказа (label)"><br>
+  <button onclick="checkPayment()">🔍 Проверить оплату</button>
+  <div class="result" id="result"></div>
 
-    <script>
-        async function checkPayment() {
-            const telegram = document.getElementById('telegram').value.trim();
-            const amount = document.getElementById('amount').value.trim();
-            const resultDiv = document.getElementById('result');
+<script>
+  async function checkPayment() {
+    const telegram = document.getElementById('telegram').value.trim();
+    const label = document.getElementById('label').value.trim();
+    const resultDiv = document.getElementById('result');
 
-            if (!telegram || !amount) {
-                resultDiv.textContent = 'Введите Telegram и сумму.';
-                resultDiv.style.color = 'red';
-                return;
-            }
+    if (!telegram || !label) {
+      resultDiv.textContent = 'Введите Telegram и номер заказа.';
+      resultDiv.style.color = 'red';
+      return;
+    }
 
-            try {
-                const response = await fetch('https://termit-backend.onrender.com/check_payment', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ telegram, label: amount })
-                });
-
-                const data = await response.json();
-                resultDiv.textContent = data.message;
-                resultDiv.style.color = response.ok ? 'lime' : 'red';
-            } catch (error) {
-                resultDiv.textContent = 'Ошибка при отправке запроса.';
-                resultDiv.style.color = 'red';
-            }
-        }
-    </script>
+    try {
+      const response = await fetch('https://termit-backend.onrender.com/check_payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ telegram, label })
+      });
+      const data = await response.json();
+      resultDiv.textContent = data.message;
+      resultDiv.style.color = data.status === 'success' ? 'lime' : 'red';
+    } catch (error) {
+      resultDiv.textContent = 'Ошибка при отправке запроса.';
+      resultDiv.style.color = 'red';
+    }
+  }
+</script>
 </body>
 </html>
