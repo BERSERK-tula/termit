@@ -1,119 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TERMIT — USB Gamepad Emulator</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #00ffcc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h1 {
-      margin-top: 2rem;
-    }
-
-    button {
-      background-color: #00ffcc;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      color: #000;
-      font-size: 1.2rem;
-      margin: 2rem;
-      cursor: pointer;
-    }
-
-    #cartPopup {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #1e1e1e;
-      color: white;
-      padding: 1rem;
-      border-radius: 10px;
-      display: none;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-
-    label, input {
-      display: block;
-      margin: 0.5rem 0;
-    }
-
-    input[type="text"], input[type="number"] {
-      padding: 0.5rem;
-      width: 100%;
-    }
-
-    #confirmForm {
-      margin-top: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>TERMIT — USB Adapter</title>
+    <style>
+        body {
+            margin: 0;
+            background: #0a0a0a;
+            color: #00ffcc;
+            font-family: "Segoe UI", sans-serif;
+            text-align: center;
+        }
+        header {
+            padding: 40px;
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            box-shadow: 0 0 15px #00ffcc40;
+        }
+        header img {
+            height: 100px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0 10px;
+            color: #00ffcc;
+        }
+        h2 {
+            font-size: 1.4em;
+            margin: 0;
+            color: #bbb;
+        }
+        .features {
+            margin: 40px auto;
+            max-width: 600px;
+            background: #111;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px #00ffcc40;
+        }
+        .features h3 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .features ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+        .features li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        .features li::before {
+            content: "✔";
+            color: lime;
+            margin-right: 10px;
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #444;
+        }
+    </style>
 </head>
 <body>
-  <h1>🎮 TERMIT</h1>
-  <p>USB-геймпад без подписок и Wi-Fi</p>
-
-  <button onclick="addToCart()">🛒 Добавить в корзину</button>
-
-  <div id="cartPopup">
-    <p>Товаров: <span id="itemCount">0</span></p>
-    <p>Сумма: <span id="totalPrice">0</span> ₽</p>
-    <button onclick="checkout()">Оформить заказ</button>
-  </div>
-
-  <div id="confirmForm" style="display:none;">
-    <h3>Подтверждение оплаты</h3>
-    <form onsubmit="sendConfirmation(); return false;">
-      <label>Ваше имя:</label>
-      <input type="text" id="name" required>
-      <label>Telegram:</label>
-      <input type="text" id="tg" required>
-      <label>Комментарий:</label>
-      <input type="text" id="comment">
-      <label>Сумма:</label>
-      <input type="number" id="sum" required>
-      <button type="submit">Отправить</button>
-    </form>
-  </div>
-
-  <script>
-    let count = 0;
-    let price = 7000;
-
-    function addToCart() {
-      count += 1;
-      document.getElementById("itemCount").innerText = count;
-      document.getElementById("totalPrice").innerText = count * price;
-      document.getElementById("cartPopup").style.display = "block";
-    }
-
-    function checkout() {
-      document.getElementById("confirmForm").style.display = "block";
-    }
-
-    function sendConfirmation() {
-      const name = document.getElementById("name").value;
-      const tg = document.getElementById("tg").value;
-      const comment = document.getElementById("comment").value;
-      const sum = document.getElementById("sum").value;
-
-      const msg = `🧾 Заказ от ${name}%0A📱 Telegram: ${tg}%0A💬 Комментарий: ${comment}%0A💰 Сумма: ${sum}₽`;
-
-      const botToken = "7616111497:AAGmiCSgMO009YBUdFqg4ZLW8PbAqKV0CWI";
-      const chatId = "5157484592";
-
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${msg}`)
-        .then(r => alert("✅ Подтверждение отправлено!"))
-        .catch(e => alert("Ошибка при отправке"));
-    }
-  </script>
+    <header>
+        <img src="logo.png" alt="TERMIT Logo">
+        <h1>TERMIT</h1>
+        <h2>USB-геймпад без задержек и драйверов</h2>
+    </header>
+    <section class="features">
+        <h3>Что умеет TERMIT:</h3>
+        <ul>
+            <li>Эмуляция геймпада по USB (HID)</li>
+            <li>Объединение клавиатуры, мыши и геймпада</li>
+            <li>Полная настройка профилей</li>
+            <li>Минимальная задержка (2 ms)</li>
+            <li>Без драйверов, Wi-Fi и подписок</li>
+        </ul>
+    </section>
+    <footer>© 2025 TERMIT. Все права защищены.</footer>
 </body>
 </html>
