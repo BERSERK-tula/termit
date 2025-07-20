@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TERMIT — USB Gamepad Emulator</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #0a0a0a, #1c1c1c);
+      color: #00ffcc;
+    }
+    header {
+      padding: 3rem 1rem;
+      text-align: center;
+      background: #121212;
+      box-shadow: 0 0 20px #00ffcc33;
+    }
+    header h1 { font-size: 3rem; margin: 0; }
+    header p { font-size: 1.2rem; color: #aaa; }
+    .features {
+      max-width: 960px;
+      margin: 3rem auto;
+      background: #181818;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 10px #00ffcc33;
+    }
+    .features h2 {
+      color: #fff; font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    .features ul {
+      list-style: none; padding: 0;
+    }
+    .features li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #00ffcc22;
+      font-size: 1.1rem;
+    }
+    .buy-button {
+      display: block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffcc88;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .buy-button:hover {
+      background: #00ddb3;
+      box-shadow: 0 0 25px #00ffcc;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #0a0a0a;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 TERMIT</h1>
+    <p>USB-геймпад без драйверов и подписок</p>
+  </header>
+  <section class="features">
+    <h2>🔧 Что умеет TERMIT:</h2>
+    <ul>
+      <li>✅ Эмуляция геймпада через USB (HID)</li>
+      <li>✅ Объединение клавиатуры, мыши и геймпада</li>
+      <li>✅ Полная настройка профилей, макросов, стиков</li>
+      <li>✅ Минимальная задержка (ниже 1 мс)</li>
+      <li>✅ Без драйверов, Wi-Fi и облака</li>
+    </ul>
+    <button class="buy-button" onclick="alert('🛒 Скоро будет доступно оформление заказа')">
+      🛒 Заказать TERMIT — 7000 ₽
+    </button>
+  </section>
+  <footer>
+    &copy; 2025 TERMIT. Все права защищены. | Сделано с 💚 и неоном
+  </footer>
+</body>
+</html>
